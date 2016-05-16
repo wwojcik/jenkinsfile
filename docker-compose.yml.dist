@@ -14,8 +14,8 @@ php:
         service: php
     links:
         - database:databasehost
-    volumes_from:
-        - data
+    volumes:
+        - .:/app:rw
 web:
 
     image: coolsoft/nginx
@@ -24,13 +24,13 @@ web:
 #    ports:
 #        - "0.0.0.0:80:80"
 #        - "0.0.0.0:443:443"
-    volumes_from:
-        - data
+    volumes:
+        - .:/app:rw
     working_dir: /app
 
 cli:
-    volumes_from:
-        - data
+    volumes:
+        - .:/app:rw
     extends:
         file: docker-common.yml
         service: php
@@ -38,6 +38,7 @@ cli:
         - database:databasehost
         - web:web-server
     working_dir: /app
+
 jenkins-swarm:
     extends:
         file: docker-common.yml
