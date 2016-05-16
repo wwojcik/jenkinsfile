@@ -1,0 +1,15 @@
+/var/bootstrap.php.cache
+/var/cache/*
+!var/cache/.gitkeep
+/app/config/parameters.yml
+/var/logs/*
+!var/logs/.gitkeep
+/var/sessions/*
+!var/sessions/.gitkeep
+/app/phpunit.xml
+/bin/
+/composer.phar
+/vendor/
+/web/bundles/
+docker-compose.yml
+

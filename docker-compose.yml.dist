@@ -1,0 +1,48 @@
+data:
+    image: busybox
+    volumes:
+        - .:/app:rw
+    working_dir: /app
+
+database:
+    image: postgres:latest
+    hostname: databasehost
+
+php:
+    extends:
+        file: docker-common.yml
+        service: php
+    links:
+        - database:databasehost
+    volumes_from:
+        - data
+web:
+
+    image: coolsoft/nginx
+    links:
+        - php:php
+#    ports:
+#        - "0.0.0.0:80:80"
+#        - "0.0.0.0:443:443"
+    volumes_from:
+        - data
+    working_dir: /app
+
+cli:
+    volumes_from:
+        - data
+    extends:
+        file: docker-common.yml
+        service: php
+    links:
+        - database:databasehost
+        - web:web-server
+    working_dir: /app
+jenkins-swarm:
+    extends:
+        file: docker-common.yml
+        service: jenkins-swarm
+    environment:
+        JENKINS_URL: 'http://hq.coolsoft.co:8090'
+        JENKINS_USER: 'jenkins'
+        JENKINS_PASSWORD: 'jenkins'

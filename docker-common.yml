@@ -1,0 +1,12 @@
+php:
+    build: dockerfiles/php
+    working_dir: /app
+
+jenkins-swarm:
+    build: dockerfiles/jenkins-swarm
+    working_dir: /home/jenkins
+    privileged: true
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+        DOCKER_DAEMON_ARGS: '-s overlay --log-level=warn'
