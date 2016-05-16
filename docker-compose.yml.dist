@@ -42,6 +42,9 @@ jenkins-swarm:
     extends:
         file: docker-common.yml
         service: jenkins-swarm
+    privileged: true
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
     environment:
         JENKINS_URL: 'http://hq.coolsoft.co:8090'
         JENKINS_USER: 'jenkins'
