@@ -1,9 +1,3 @@
-data:
-    image: busybox
-    volumes:
-        - .:/app:rw
-    working_dir: /app
-
 database:
     image: postgres:latest
     hostname: databasehost

@@ -10,4 +10,5 @@ RUN docker-php-ext-install bcmath iconv mcrypt intl opcache zip ctype json mbstr
     && rm -rf /tmp/pear \
     && rm -rf /usr/src/php
 COPY config/php.ini /usr/local/etc/php/
+USER www-data
 CMD ["php-fpm"]
